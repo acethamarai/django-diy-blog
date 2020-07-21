@@ -111,3 +111,14 @@ class BlogCommentCreate(LoginRequiredMixin, CreateView):
         After posting comment return to associated blog.
         """
         return reverse('blog-detail', kwargs={'pk': self.kwargs['pk'],})
+
+
+class BlogCreate(LoginRequiredMixin, generic.CreateView):
+    model = Blog
+    fields = ['name', 'description']
+    # exit()
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        # return super().form_valid(form)
+        return super(BlogCreate, self).form_valid(form)
+

@@ -36,7 +36,8 @@ class Blog(models.Model):
     Model representing a blog post.
     """
     name = models.CharField(max_length=200)
-    author = models.ForeignKey(BlogAuthor, on_delete=models.SET_NULL, null=True)
+    # author = models.ForeignKey(BlogAuthor, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
       # Foreign Key used because Blog can only have one author/User, but bloggsers can have multiple blog posts.
     description = models.TextField(max_length=2000, help_text="Enter you blog text here.")
     post_date = models.DateField(default=date.today)
